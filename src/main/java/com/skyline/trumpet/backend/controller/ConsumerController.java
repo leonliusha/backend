@@ -3,10 +3,12 @@ package com.skyline.trumpet.backend.controller;
 import com.skyline.trumpet.backend.common.Coordinate;
 import com.skyline.trumpet.backend.configuration.DataConfig;
 import com.skyline.trumpet.backend.model.Broadcast;
+import com.skyline.trumpet.backend.model.BroadcastTags;
 import com.skyline.trumpet.backend.model.Greeting;
 import com.skyline.trumpet.backend.model.Message;
 import com.skyline.trumpet.backend.persistence.BroadcastMapper;
 import com.skyline.trumpet.backend.service.BroadcastService;
+import com.skyline.trumpet.backend.service.TagService;
 import com.skyline.trumpet.backend.util.UtilTools;
 
 import java.sql.Timestamp;
@@ -41,6 +43,8 @@ public class ConsumerController {
     
     @Resource
     private BroadcastService broadcastService;
+    @Resource
+    private TagService tagService;
 
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
@@ -58,11 +62,17 @@ public class ConsumerController {
     @RequestMapping(value = "/newBroadcast", method = RequestMethod.POST, consumes = "application/json")
     public Broadcast createNewBroadcast(@RequestBody Broadcast broadcast){
     	Timestamp createdDate = new Timestamp(new Date().getTime());
-    	Broadcast newBroadcast = new Broadcast(1,broadcast.getBrief(),broadcast.getDescription(),
-               1,0,createdDate,broadcast.getExpireDate(),broadcast.getLatitude(),broadcast.getLongitude());    	
-    	System.out.println(newBroadcast.toString());
-    	broadcastService.insertBroadcast(newBroadcast);
-    	return newBroadcast;
+    	String[] ids = broadcast.getTagsId().split(" ");
+    	int[] tagIds = new int[ids.length];
+    	for(int i=0;i<ids.length;i++){
+    		tagIds[i] = Integer.parseInt(ids[i]);
+    	}
+    	broadcast.setCreatedDate(createdDate);
+//    	Broadcast newBroadcast = new Broadcast(1,broadcast.getBrief(),broadcast.getDescription(),
+//               1,0,createdDate,broadcast.getExpireDate(),broadcast.getLatitude(),broadcast.getLongitude());    	
+    	broadcastService.insertBroadcast(broadcast);
+    	tagService.updateRelationship(broadcast.getId(), tagIds);
+    	return broadcast;
 //    	System.out.println("the result of insertion is : "+ result);
 //    	return result;
     	

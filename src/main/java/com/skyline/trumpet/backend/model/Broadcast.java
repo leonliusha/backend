@@ -17,6 +17,16 @@ public class Broadcast {
     private Timestamp expireDate;
    	private double latitude;
  	private double longitude;
+	private String tags;
+	private String tagsId;
+    public String getTagsId() {
+
+        return tagsId;
+    }
+
+    public void setTagsId(String tagsId) {
+        this.tagsId = tagsId;
+    }
 
     public Broadcast(){}
 //    //constructor for app
@@ -125,5 +135,13 @@ public class Broadcast {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 }

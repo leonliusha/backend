@@ -1,5 +1,7 @@
 package com.skyline.trumpet.backend.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +22,8 @@ public class BroadcastService{
 	@Autowired
 	private BroadcastMapper broadcastMapper;
 	
-	public void insertBroadcast(Broadcast broadcast){
-		 broadcastMapper.insertBroadcast(broadcast);
+	public void insertBroadcast(Broadcast broadcast){		
+		broadcastMapper.insertBroadcast(broadcast);;
 	}
 	
 	public List<Broadcast> getBroadcastsInDefaultRange(Map<String, Coordinate> coordinateRange){
@@ -31,7 +33,8 @@ public class BroadcastService{
 		double ceilingLongitude = ceilingRange.getLongitude();
 		double floorLatitude = floorRange.getLatitude();
 		double floorLongitude = floorRange.getLongitude();
-		return broadcastMapper.getBroadcastsInDefaultRange(ceilingLatitude,floorLatitude,ceilingLongitude,floorLongitude);
+		Timestamp current_timeStamp = new Timestamp(new Date().getTime());
+		return broadcastMapper.getBroadcastsInDefaultRange(current_timeStamp,ceilingLatitude,floorLatitude,ceilingLongitude,floorLongitude);
 	}
 
 }
