@@ -8,6 +8,8 @@ import org.joda.time.DateTime;
  */
 public class Broadcast {
     private long id;
+    private long userId;
+    private String author;
     private int type;
     private String brief;
     private String description;
@@ -40,8 +42,10 @@ public class Broadcast {
 //    }
 
     //constructor for backend
-    public Broadcast(int type, String brief, String description, int amount, int count, Timestamp createdDate, Timestamp expireDate, double latitude, double longitude){
-        this.type = type;
+    public Broadcast(long userId,String author,int type, String brief, String description, int amount, int count, Timestamp createdDate, Timestamp expireDate, double latitude, double longitude){
+        this.userId = userId;
+        this.author = author;
+    	this.type = type;
         this.brief = brief;
         this.description = description;
         this.amount = amount;
@@ -144,4 +148,21 @@ public class Broadcast {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
+	
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 }

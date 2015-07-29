@@ -17,6 +17,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
+import com.skyline.trumpet.backend.common.Constant;
+
 @Configuration
 @MapperScan(basePackages="com.skyline.trumpet.backend.persistence")
 
@@ -28,7 +30,8 @@ public class DataConfig {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/trumpet?relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull");
 		dataSource.setUsername("root");
-		dataSource.setPassword("19830421");
+		//dataSource.setPassword(Constant.PW_DEVELOPMENT);
+		dataSource.setPassword(Constant.DB_PASSWORD);
 		return dataSource;
 	}
 	

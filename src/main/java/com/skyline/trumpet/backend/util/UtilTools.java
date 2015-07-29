@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.skyline.trumpet.backend.common.Constant;
 import com.skyline.trumpet.backend.common.Coordinate;
+import com.skyline.trumpet.backend.model.User;
 
 public class UtilTools {
 	
@@ -19,6 +20,15 @@ public class UtilTools {
 		coordinateRange.put("ceilingRange", ceilingRange);
 		coordinateRange.put("floorRange",floorRange);
 		return coordinateRange;
+	}
+	
+	public static boolean validUser(User user){
+		if (user == null)
+			return false;
+		else if(user.getUserName()==null || user.getUserName().trim().equals("")
+				||user.getPassword()==null || user.getPassword().trim().equals(""))
+			return false;
+		return true;
 	}
 
 }

@@ -6,9 +6,11 @@ import com.skyline.trumpet.backend.model.Broadcast;
 import com.skyline.trumpet.backend.model.BroadcastTags;
 import com.skyline.trumpet.backend.model.Greeting;
 import com.skyline.trumpet.backend.model.Message;
+import com.skyline.trumpet.backend.model.User;
 import com.skyline.trumpet.backend.persistence.BroadcastMapper;
 import com.skyline.trumpet.backend.service.BroadcastService;
 import com.skyline.trumpet.backend.service.TagService;
+import com.skyline.trumpet.backend.service.UserService;
 import com.skyline.trumpet.backend.util.UtilTools;
 
 import java.sql.Timestamp;
@@ -45,6 +47,8 @@ public class ConsumerController {
     private BroadcastService broadcastService;
     @Resource
     private TagService tagService;
+    @Resource
+	private UserService userService;
 
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
@@ -52,11 +56,21 @@ public class ConsumerController {
                             String.format(template, name));
     }
     
-    @RequestMapping("/helloworld")
+    @RequestMapping("/TestHelloworld")
     public Message greeting(){
         Message message = new Message("hello","world");
         return message;
     }
+    
+    
+    
+//    @RequestMapping(value = "/userRegister", method = RequestMethod.POST,consumes = "application/json")
+//	public User userRegister(@RequestBody User user){
+////		if(UtilTools.validUser(user)){
+////			userService.userRegister(user);
+////		}
+//		return new User("1","2");
+//	}
     
     
     @RequestMapping(value = "/newBroadcast", method = RequestMethod.POST, consumes = "application/json")
@@ -84,19 +98,6 @@ public class ConsumerController {
     	
     	Map<String,Coordinate> coordinateRange = UtilTools.constructDefaultCoordinateRange(latitude, longitude);
     	List<Broadcast> broadcasts = broadcastService.getBroadcastsInDefaultRange(coordinateRange);
-//    	Broadcast newBroadcast1 = new Broadcast(1,"这是我的第一个微播","不错哦",
-//                1,0,new Timestamp(new Date().getTime()),new Timestamp(new Date().getTime()),31.145491,121.093407);
-//    	Broadcast newBroadcast2 = new Broadcast(1,"这是我的第2个微播","不错哦",
-//                1,0,new Timestamp(new Date().getTime()),new Timestamp(new Date().getTime()),31.145491,121.103407);
-//    	Broadcast newBroadcast3 = new Broadcast(1,"这是我的第3个微播","不错哦",
-//                1,0,new Timestamp(new Date().getTime()),new Timestamp(new Date().getTime()),31.125491,121.093407);
-//    	Broadcast newBroadcast4 = new Broadcast(1,"这是我的第4个微播","不错哦",
-//                1,0,new Timestamp(new Date().getTime()),new Timestamp(new Date().getTime()),31.125491,121.103407);
-//    	broadcasts.add(newBroadcast4);
-//    	broadcasts.add(newBroadcast3);
-//    	broadcasts.add(newBroadcast2);
-//    	broadcasts.add(newBroadcast1);
-    	System.out.println("the size of broadcasts is :"+broadcasts.size());
     	return broadcasts.toArray(new Broadcast[broadcasts.size()]);
     }
 }

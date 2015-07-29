@@ -19,16 +19,19 @@ import com.skyline.trumpet.backend.model.Broadcast;
 
 public interface BroadcastMapper {
 	@Options(useGeneratedKeys=true,keyProperty="id", keyColumn="id")
-	@Insert("INSERT INTO broadcast(broadcast_type,brief,description,amount,count,created_date,expire_date,latitude,longitude,tags) VALUES(#{type},#{brief},#{description},#{amount},#{count},#{createdDate},#{expireDate},#{latitude},#{longitude},#{tags})")
+	@Insert("INSERT INTO broadcast(user_id,author,broadcast_type,brief,description,amount,count,created_date,expire_date,latitude,longitude,tags) VALUES(#{userId},#{author},#{type},#{brief},#{description},#{amount},#{count},#{createdDate},#{expireDate},#{latitude},#{longitude},#{tags})")
 	void insertBroadcast(Broadcast broadcast);
 	
 	@Results(value={
 			@Result(column="broadcast_type", property="type"),
 			@Result(column="created_date", property="createdDate"),
-			@Result(column="expire_date", property="expireDate")
+			@Result(column="expire_date", property="expireDate"),
+			@Result(column="user_id", property="userId")
 	}
 			)
 	@Select("select * from broadcast where expire_date > #{current_timeStamp} and latitude between #{floorLatitude} and #{ceilingLatitude} and longitude between #{floorLongitude} and #{ceilingLongitude};")
 	List<Broadcast> getBroadcastsInDefaultRange(@Param("current_timeStamp") Timestamp current_timeStamp, @Param("ceilingLatitude") double ceilingLatitude,@Param("floorLatitude")double floorLatitude,@Param("ceilingLongitude")double ceilingLongitude,@Param("floorLongitude")double floorLongitude);
 
+	@Select("select * from broadcast where user_id = #{userId}")
+	List<Broadcast> getBroadcastByUserId(@Param("userId") long userId);
 }

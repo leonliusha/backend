@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -17,9 +19,13 @@ import com.skyline.trumpet.backend.service.BroadcastService;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.skyline.trumpet.backend")
-public class Application{
+public class Application {//extends SpringBootServletInitializer{
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
+//		return application.sources(Application.class);
+//	}
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
            SpringApplication.run(Application.class, args);
     }
 }
