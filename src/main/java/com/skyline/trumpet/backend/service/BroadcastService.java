@@ -36,5 +36,9 @@ public class BroadcastService{
 		Timestamp current_timeStamp = new Timestamp(new Date().getTime());
 		return broadcastMapper.getBroadcastsInDefaultRange(current_timeStamp,ceilingLatitude,floorLatitude,ceilingLongitude,floorLongitude);
 	}
+	
+	public List<Broadcast> getBroadcastsOrderByDateDesc(){
+		return broadcastMapper.getBroadcastsOrderByDateDesc();
+	}
 
 }

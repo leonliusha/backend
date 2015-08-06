@@ -6,6 +6,15 @@ public class User {
 	private String password;
 	private String email;
 	private String phone;
+	private String avaterUrl;
+
+	public String getAvaterUrl() {
+	    return avaterUrl;
+	}
+
+	public void setAvaterUrl(String avaterUrl) {
+	    this.avaterUrl = avaterUrl;
+	}
 	
 	public User(){}
 	
@@ -20,6 +29,14 @@ public class User {
         this.password = password;
         this.email = email;
         this.phone = phone;
+    }
+	
+	public User(String userName, String password, String email, String phone, String avaterUrl){
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.avaterUrl = avaterUrl;
     }
 	
 	public User(long id, String userName, String password, String email, String phone){

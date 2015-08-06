@@ -21,6 +21,25 @@ public class Broadcast {
  	private double longitude;
 	private String tags;
 	private String tagsId;
+	private String avatarUrl;
+	private String photoUrl;
+
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
+
+	public String getAvatarUrl() {
+	    return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+	    this.avatarUrl = avatarUrl;
+	}
+	
     public String getTagsId() {
 
         return tagsId;
@@ -41,8 +60,21 @@ public class Broadcast {
 //        this.currentDate = new DateTime();
 //    }
 
+    public Broadcast(long userId,String author,int type, String description, double latitude, 
+    				double longitude, String avatarUrl, String photoUrl){
+    	this.userId = userId;
+        this.author = author;
+    	this.type = type;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.avatarUrl = avatarUrl;
+        this.photoUrl = photoUrl;
+    }
+    
     //constructor for backend
-    public Broadcast(long userId,String author,int type, String brief, String description, int amount, int count, Timestamp createdDate, Timestamp expireDate, double latitude, double longitude){
+    public Broadcast(long userId,String author,int type, String brief, String description, int amount, 
+    				int count, Timestamp createdDate, Timestamp expireDate, double latitude, double longitude){
         this.userId = userId;
         this.author = author;
     	this.type = type;
@@ -54,6 +86,26 @@ public class Broadcast {
         this.expireDate = expireDate;
         this.latitude = latitude;
         this.longitude = longitude;
+        
+    }
+    
+    public Broadcast(long userId,String author,int type, String brief, String description, int amount, 
+    					int count, Timestamp createdDate, Timestamp expireDate, String tags, double latitude, double longitude,
+    					String avatarUrl, String photoUrl){
+        this.userId = userId;
+        this.author = author;
+    	this.type = type;
+        this.brief = brief;
+        this.description = description;
+        this.amount = amount;
+        this.count = count;
+        this.createdDate = createdDate;
+        this.expireDate = expireDate;
+        this.tags = tags;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.avatarUrl = avatarUrl;
+        this.photoUrl = photoUrl;
         
     }
 

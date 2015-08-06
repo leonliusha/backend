@@ -32,6 +32,26 @@ public interface BroadcastMapper {
 	@Select("select * from broadcast where expire_date > #{current_timeStamp} and latitude between #{floorLatitude} and #{ceilingLatitude} and longitude between #{floorLongitude} and #{ceilingLongitude};")
 	List<Broadcast> getBroadcastsInDefaultRange(@Param("current_timeStamp") Timestamp current_timeStamp, @Param("ceilingLatitude") double ceilingLatitude,@Param("floorLatitude")double floorLatitude,@Param("ceilingLongitude")double ceilingLongitude,@Param("floorLongitude")double floorLongitude);
 
+	
+	//TO DO
+	//this @Result is UGLY, UGLY, trying to figure out a way to address them only ONCE!!!
+	@Results(value={
+			@Result(column="broadcast_type", property="type"),
+			@Result(column="created_date", property="createdDate"),
+			@Result(column="expire_date", property="expireDate"),
+			@Result(column="user_id", property="userId")
+	}
+			)
+	@Select("select * from broadcast order by created_date desc;")
+	List<Broadcast> getBroadcastsOrderByDateDesc();
+	
+	@Results(value={
+			@Result(column="broadcast_type", property="type"),
+			@Result(column="created_date", property="createdDate"),
+			@Result(column="expire_date", property="expireDate"),
+			@Result(column="user_id", property="userId")
+	}
+			)
 	@Select("select * from broadcast where user_id = #{userId}")
 	List<Broadcast> getBroadcastByUserId(@Param("userId") long userId);
 }

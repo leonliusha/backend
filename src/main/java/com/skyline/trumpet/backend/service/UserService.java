@@ -21,4 +21,8 @@ public class UserService {
 	public List<User> userLogin(User user){
 		return userMapper.userLogin(user);
 	}
+	
+	public List<User> getUserById(long id){
+		return userMapper.getUserById(id);
+	}
 }

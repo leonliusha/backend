@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skyline.trumpet.backend.model.User;
@@ -35,6 +36,12 @@ public class UserController {
 			loginUser = users.get(0);
 		}
 		return loginUser;
+	}
+	
+	@RequestMapping(value="/getUserById")
+	public User getUserById(@RequestParam(value="userId") long userId){
+		List<User> users = userService.getUserById(userId);
+		return users.get(0);
 	}
 	
 	
